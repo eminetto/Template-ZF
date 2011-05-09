@@ -20,6 +20,7 @@ VHOST
 =====================
 
 Uma forma fácil de se trabalhar com projetos é configurar um VHOST em seu Apache. No arquivo de configuração faça como no exemplo:
+NameVirtualHost *
 
 <VirtualHost *:80>
    DocumentRoot "/Applications/MAMP/htdocs/Template-ZF"
