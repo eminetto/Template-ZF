@@ -14,6 +14,9 @@ index.php - bootstrap do projeto. É necessário configurar ao menos os caminhos
 models - modelos do projeto
 views/layouts - layouts do projeto
 views/scripts/ - diretórios para as visões usadas pelos controladores
+public/css/ - arquivos css
+public/js/ - arquivos js
+public/img/ - imagens
 
 
 VHOST
