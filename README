@@ -5,7 +5,7 @@ Esse é um template de aplicação Zend Framework usado por mim para os projetos
 
 Estrutura do projeto:
 .htaccess - arquivo com as configurações de redirect necessárias para o projeto
-config/config.ini - arquivo com as configurações do projeto como cache, banco de dados, traduções, etc
+config/production.ini - arquivo com as configurações do projeto como cache, banco de dados, traduções, etc
 controllers/ - diretório para os controladores do projeto
 data/cache - diretório para salvar cache em arquivos
 doc - documentações do projeto
@@ -18,6 +18,7 @@ public/css/ - arquivos css
 public/js/ - arquivos js
 public/img/ - imagens
 
+É necessário fazer uma cópia do arquivo config/production.ini para config/development.ini e alterar os dados para sua máquina
 
 VHOST
 =====================
@@ -27,15 +28,20 @@ Uma forma fácil de se trabalhar com projetos é configurar um VHOST em seu Apac
 NameVirtualHost *
 
 <VirtualHost *:80>
-   DocumentRoot "/Applications/MAMP/htdocs/Template-ZF"
-   ServerName zf.local
+	DocumentRoot "/Applications/MAMP/htdocs/Template-ZF"
 	
-   SetEnv APPLICATION_ENV "development"	
+	ServerName zf.local
 	
-   <Directory "/Applications/MAMP/htdocs/Template-ZF">
-       Options Indexes MultiViews FollowSymLinks
-       AllowOverride All
-       Order allow,deny
-       Allow from all
-   </Directory>
+	SetEnv APPLICATION_ENV "development"	
+	SetEnv CLASS_PATH "/Applications/MAMP/htdocs/library/"
+	SetEnv BASE_URL ""	
+	SetEnv HTTP_URL "http://zf.local"	
+	SetEnv BAR "/"	
+	
+	<Directory "/Applications/MAMP/htdocs/Template-ZF">
+		Options Indexes MultiViews FollowSymLinks
+		AllowOverride All
+		Order allow,deny
+		Allow from all
+	</Directory>
 </VirtualHost>

@@ -31,18 +31,30 @@ if(!$env) {
 	$env = 'production';
 }
 
-if( $env == 'production' ){
-	define('DOCUMENT_ROOT', '/var/www/html/');
+define('DOCUMENT_ROOT', getenv('DOCUMENT_ROOT'));
+
+if(getenv('BASE_URL'))
+	define('BASE_URL', getenv('BASE_URL'));
+else
 	define('BASE_URL', '/Template-ZF');
+
+if(getenv('HTTP_URL'))
+	define('HTTP_URL', getenv('HTTP_URL'));
+else
 	define('HTTP_URL', 'http://www.site.com/Template-ZF');
-}else{
-	define('DOCUMENT_ROOT', '/Applications/MAMP/htdocs/');
-	define('BASE_URL', '');
-	define('HTTP_URL', 'http://zf.local');
-}
-define('BAR', '/');
-define('PROJECT_PATH', DOCUMENT_ROOT . 'Template-ZF' . BAR);
-define('CLASS_PATH', DOCUMENT_ROOT . 'library' . BAR);
+
+if(getenv('BAR'))
+	define('BAR', getenv('BAR'));
+else
+	define('BAR', '/');
+
+if(getenv('CLASS_PATH'))
+	define('CLASS_PATH', getenv('CLASS_PATH'));
+else
+	define('CLASS_PATH', '/var/www/html/library/');
+
+	
+define('PROJECT_PATH', DOCUMENT_ROOT . BAR);
 define('CONTROLLER_PATH', PROJECT_PATH . 'controllers' . BAR);
 define('MODELS_PATH', PROJECT_PATH . 'models' . BAR);
 define('FORMS_PATH', PROJECT_PATH . 'forms' . BAR);
@@ -51,6 +63,7 @@ define('DATA_PATH', PROJECT_PATH . 'data' . BAR);
 define('CACHE_PATH', DATA_PATH . 'cache' . BAR);
 define('CONFIG_PATH', PROJECT_PATH . 'config' . BAR);
 define('LANG_PATH', PROJECT_PATH . 'lang' . BAR);
+define('MODULE_CONTROLLER_PATH', PROJECT_PATH . 'modules'. BAR );
 
 /**
  * Pega o include_path do PHP e adiciona os caminhos das classes e dos models
@@ -87,7 +100,7 @@ $autoloader->setFallbackAutoloader(true);
 /* 
  * Busca as configurações
 */
-$config = new Zend_Config_Ini(CONFIG_PATH . 'config.ini',$env);
+$config = new Zend_Config_Ini(CONFIG_PATH . "$env.ini");
 $config = $config->toArray();
 
 /*
